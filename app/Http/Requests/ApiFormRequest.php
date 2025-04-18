@@ -12,7 +12,13 @@ abstract class ApiFormRequest extends FormRequest
   protected function failedValidation(Validator $validator)
   {
     throw new HttpResponseException(
-      ApiResponse::error('Erro de validação', 422, $validator->errors())
+      response()->json([
+        'status' => 'error',
+        'message' => 'Erro de validação',
+        'validation' => true,
+        'errors' => $validator->errors(),
+        'alert' => true,
+      ], 422)
     );
   }
 }

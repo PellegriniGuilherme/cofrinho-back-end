@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-class LoginRequest extends ApiFormRequest
+class ForgotPasswordRequest extends ApiFormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -12,8 +13,7 @@ class LoginRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => 'required|email|exists:users,email',
         ];
     }
 }

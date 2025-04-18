@@ -19,13 +19,6 @@ class Handler extends ExceptionHandler
         return ApiResponse::error('Não autenticado', 401, ['alert' => true]);
       }
 
-      if ($exception instanceof ValidationException) {
-        return ApiResponse::error('Erro de validação', 422, [
-          'errors' => $exception->errors(),
-          'alert' => true,
-        ]);
-      }
-
       if ($exception instanceof ModelNotFoundException) {
         return ApiResponse::error('Recurso não encontrado', 404, ['alert' => true]);
       }

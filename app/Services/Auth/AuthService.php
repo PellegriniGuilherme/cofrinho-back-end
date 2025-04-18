@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,6 +22,50 @@ class AuthService
     ]);
 
     return $user;
+  }
+
+  public function forgotPassword(Request $request): array
+  {
+    $status = Password::sendResetLink(
+      $request->only('email')
+    );
+
+    if (Password::RESET_LINK_SENT === $status) {
+      return [
+        'status' => 'success',
+        'message' => 'Password reset link sent to your email.'
+      ];
+    } else {
+      return [
+        'status' => 'error',
+        'message' => 'Failed to send password reset link.'
+      ];
+    }
+  }
+
+  public function resetPassword(Request $request): array
+  {
+    $status = Password::reset(
+      $request->only('email', 'password', 'password_confirmation', 'token'),
+      function ($user) use ($request) {
+        $user->forceFill([
+          'password' => Hash::make($request->password),
+          'remember_token' => Str::random(60),
+        ])->save();
+      }
+    );
+
+    if (Password::PASSWORD_RESET === $status) {
+      return [
+        'status' => 'success',
+        'message' => 'Password reset successfully.'
+      ];
+    } else {
+      return [
+        'status' => 'error',
+        'message' => 'Failed to reset password.'
+      ];
+    }
   }
 
   public function login(Request $request): array | null
