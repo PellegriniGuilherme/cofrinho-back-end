@@ -4,24 +4,36 @@ namespace App\Services\Auth;
 
 use App\Helpers\CookieHelper;
 use App\Models\User;
+use App\Services\Account\AccountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 
 class AuthService
 {
+
+  public function __construct(private AccountService $accountService) {}
   public function register(Request $request): User
   {
-    $user = User::create([
-      'name' => $request->name,
-      'email' => $request->email,
-      'password' => Hash::make($request->password),
-    ]);
+    DB::beginTransaction();
+    try {
+      $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+      ]);
 
-    return $user;
+      $this->accountService->create($user->id, 0);
+
+      DB::commit();
+      return $user;
+    } catch (\Throwable $th) {
+      DB::rollBack();
+      throw $th;
+    }
   }
 
   public function forgotPassword(Request $request): array

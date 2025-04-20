@@ -7,7 +7,6 @@
                     src="{{ asset('images/Logo.png') }}"
                     class="logo"
                     alt="{{ config('app.name') }} Logo"
-                    style="max-height: 50px; /* ajuste conforme necessário */"
                 >
             @else
                 {{ $slot }}
