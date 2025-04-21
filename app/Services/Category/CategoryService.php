@@ -41,6 +41,8 @@ class CategoryService
       throw new \Exception('Category not found');
     }
 
+    $category->transactions()->update(['category_id' => null]);
+
     $category->delete();
 
     return response()->json(['message' => 'Category deleted successfully']);
