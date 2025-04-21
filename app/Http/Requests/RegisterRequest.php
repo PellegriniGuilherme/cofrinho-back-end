@@ -17,4 +17,13 @@ class RegisterRequest extends ApiFormRequest
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nome',
+            'email' => 'e-mail',
+            'password' => 'senha',
+        ];
+    }
 }

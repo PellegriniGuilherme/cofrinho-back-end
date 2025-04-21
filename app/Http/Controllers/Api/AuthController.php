@@ -29,18 +29,18 @@ class AuthController extends Controller
         $response = $this->authService->login($request);
 
         if ($response) {
-            return ApiResponse::success($response['user'], 'User logged in successfully')
+            return ApiResponse::success($response['user'], 'Usuario logado com sucesso')
                 ->cookie($response['cookie']);
         }
 
-        return ApiResponse::error('Invalid credentials', 401, ['alert' => true]);
+        return ApiResponse::error('Credenciais inválidas', 422, ['alert' => true]);
     }
 
     public function logout()
     {
         $response = $this->authService->logout();
 
-        return ApiResponse::success(['alert' => true], 'User logged out successfully')
+        return ApiResponse::success(['alert' => true], 'Logout realizado com sucesso')
             ->cookie($response['cookie']);
     }
 
@@ -48,7 +48,7 @@ class AuthController extends Controller
     {
         $user = $this->authService->user();
 
-        return ApiResponse::success($user, 'User retrieved successfully');
+        return ApiResponse::success($user, 'Usuario recuperado com sucesso');
     }
 
     public function forgotPassword(ForgotPasswordRequest $request)

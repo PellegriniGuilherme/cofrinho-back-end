@@ -17,4 +17,13 @@ class ResetPasswordRequest extends ApiFormRequest
             'token' => 'required|string',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => 'e-mail',
+            'password' => 'senha',
+            'token' => 'token de redefinição',
+        ];
+    }
 }

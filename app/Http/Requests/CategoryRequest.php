@@ -16,4 +16,12 @@ class CategoryRequest extends ApiFormRequest
       'color' => ['required', 'string', 'size:7'],
     ];
   }
+
+  public function attributes(): array
+  {
+    return [
+      'name' => 'nome',
+      'color' => 'cor',
+    ];
+  }
 }

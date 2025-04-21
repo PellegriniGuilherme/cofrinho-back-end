@@ -16,4 +16,11 @@ class ForgotPasswordRequest extends ApiFormRequest
             'email' => 'required|email|exists:users,email',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => 'e-mail',
+        ];
+    }
 }

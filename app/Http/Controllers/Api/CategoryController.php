@@ -19,7 +19,7 @@ class CategoryController extends Controller
       $user = Auth::user();
       $categories = $this->categoryService->index($user);
 
-      return ApiResponse::success($categories, 'Categories retrieved successfully');
+      return ApiResponse::success($categories, 'Categorias recuperadas com sucesso.');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro ao buscar categorias', 422, ['alert' => true]);
     }
@@ -31,7 +31,7 @@ class CategoryController extends Controller
       $user = Auth::user();
       $this->categoryService->store($user, $request);
 
-      return ApiResponse::success(['alert' => true], 'Category created successfully');
+      return ApiResponse::success(['alert' => true], 'Categoria criada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro salvar categoria', 422, ['alert' => true]);
     }
@@ -43,7 +43,7 @@ class CategoryController extends Controller
       $user = Auth::user();
       $this->categoryService->update($user, $category, $request);
 
-      return ApiResponse::success(['alert' => true], 'Category updated successfully');
+      return ApiResponse::success(['alert' => true], 'Categoria atualizada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro atualizar categoria', 422, ['alert' => true]);
     }
@@ -55,7 +55,7 @@ class CategoryController extends Controller
       $user = Auth::user();
       $this->categoryService->destroy($user, $category);
 
-      return ApiResponse::success(['alert' => true], 'Category deleted successfully');
+      return ApiResponse::success(['alert' => true], 'Categoria deletada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro ao deletar categoria', 422, ['alert' => true]);
     }

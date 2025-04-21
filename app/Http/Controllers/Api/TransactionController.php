@@ -19,7 +19,7 @@ class TransactionController extends Controller
       $user = Auth::user();
       $categories = $this->transactionService->index($user);
 
-      return ApiResponse::success($categories, 'Transactions retrieved successfully');
+      return ApiResponse::success($categories, 'Transações recuperadas com sucesso.');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro ao buscar transações', 422, ['alert' => true]);
     }
@@ -31,7 +31,7 @@ class TransactionController extends Controller
       $user = Auth::user();
       $balance = $this->transactionService->summary($user);
 
-      return ApiResponse::success($balance, 'Dashboard retrieved successfully');
+      return ApiResponse::success($balance, 'Resumo financeiro recuperado com sucesso.');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro ao buscar dados', 422, ['alert' => true]);
     }
@@ -43,7 +43,7 @@ class TransactionController extends Controller
       $user = Auth::user();
       $this->transactionService->store($user, $request);
 
-      return ApiResponse::success(['alert' => true], 'Transaction created successfully');
+      return ApiResponse::success(['alert' => true], 'Transação criada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error($e, 422, ['alert' => true]);
     }
@@ -55,7 +55,7 @@ class TransactionController extends Controller
       $user = Auth::user();
       $this->transactionService->update($user, $transaction, $request);
 
-      return ApiResponse::success(['alert' => true], 'Transaction updated successfully');
+      return ApiResponse::success(['alert' => true], 'Transação atualizada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error($e, 422, ['alert' => true]);
     }
@@ -67,7 +67,7 @@ class TransactionController extends Controller
       $user = Auth::user();
       $this->transactionService->destroy($user, $transaction);
 
-      return ApiResponse::success(['alert' => true], 'Transaction deleted successfully');
+      return ApiResponse::success(['alert' => true], 'Transação deletada com sucesso');
     } catch (\Exception $e) {
       return ApiResponse::error('Erro ao deletar transação', 422, ['alert' => true]);
     }

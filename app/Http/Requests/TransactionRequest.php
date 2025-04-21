@@ -19,4 +19,15 @@ class TransactionRequest extends ApiFormRequest
       'type' => ['required', 'in:income,expense'],
     ];
   }
+
+  public function attributes(): array
+  {
+    return [
+      'category_id' => 'categoria',
+      'amount' => 'valor',
+      'description' => 'descrição',
+      'happened_at' => 'data do lançamento',
+      'type' => 'tipo',
+    ];
+  }
 }
