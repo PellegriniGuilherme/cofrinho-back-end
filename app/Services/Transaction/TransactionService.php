@@ -17,7 +17,7 @@ class TransactionService
     return Transaction::where('account_id', $user->account->id)
       ->with(['category', 'account'])
       ->orderBy('happened_at', 'desc')
-      ->paginate(10);
+      ->paginate(7);
   }
 
   public function store(User $user, Request $request): Transaction
