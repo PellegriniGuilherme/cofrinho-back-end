@@ -45,12 +45,12 @@ class AuthService
     if (Password::RESET_LINK_SENT === $status) {
       return [
         'status' => 'success',
-        'message' => 'Password reset link sent to your email.'
+        'message' => 'Link para redefinição de senha enviado com sucesso.'
       ];
     } else {
       return [
         'status' => 'error',
-        'message' => 'Failed to send password reset link.'
+        'message' => 'Falha ao enviar o link para redefinição de senha.'
       ];
     }
   }
@@ -70,12 +70,12 @@ class AuthService
     if (Password::PASSWORD_RESET === $status) {
       return [
         'status' => 'success',
-        'message' => 'Password reset successfully.'
+        'message' => 'Senha redefinida com sucesso.'
       ];
     } else {
       return [
         'status' => 'error',
-        'message' => 'Failed to reset password.'
+        'message' => 'Falha ao redefinir a senha.'
       ];
     }
   }
